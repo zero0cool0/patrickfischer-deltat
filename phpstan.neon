@@ -1,0 +1,8 @@
+includes:
+parameters:
+    paths:
+        - src
+    scanFiles:
+    level: 5
+    ignoreErrors:
+    excludePaths:

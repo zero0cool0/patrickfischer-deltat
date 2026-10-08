@@ -1,0 +1,45 @@
+{
+  "name": "patrickfischer/deltat",
+  "description": "DeltaT lookup, sourced from https://maia.usno.navy.mil or fallback",
+  "type": "library",
+  "license": "MIT",
+  "version": "2.0.11",
+  "authors": [
+    {
+      "name": "Patrick Fischer",
+      "email": "mail@patrickfischer.ch"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0|^13.0",
+    "nesbot/carbon": "^3.11",
+    "psy/psysh": "^0.12.23"
+  },
+  "require-dev": {
+    "larastan/larastan": "^3.9",
+    "phpunit/phpunit": "^13.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "PatrickFischer\\DeltaT\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PatrickFischer\\DeltaT\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "scripts": {
+    "post-autoload-dump": [],
+    "lint": [
+      "@php vendor/bin/phpstan analyse --verbose --ansi"
+    ],
+    "test": [
+      "@clear",
+      "@php vendor/bin/phpunit"
+    ]
+  }
+}
