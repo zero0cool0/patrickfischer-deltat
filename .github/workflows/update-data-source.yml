@@ -1,0 +1,83 @@
+name: Update data source & release
+
+on:
+  schedule:
+    - cron: '40 8 1 * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    container:
+      image: php:8.4-cli
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y nodejs git unzip jq
+
+      - name: Checkout latest HEAD
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer \
+            | php -- --install-dir=/usr/local/bin --filename=composer
+
+      - name: Install composer dependencies
+        run: composer install --no-dev
+
+      - name: Fetch & regenerate data
+        run: php scripts/update.php
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit & release
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          # Get latest version tag, e.g. 1.2.9
+          LATEST_TAG=$(git tag --sort=-version:refname | head -n 1)
+
+          # Default if no tags exist yet
+          if [ -z "$LATEST_TAG" ]; then
+            LATEST_TAG="0.0.0"
+          fi
+
+          echo "Latest version: $LATEST_TAG"
+
+          # Split version into major, minor and patch
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$LATEST_TAG"
+
+          # Increment patch version
+          PATCH=$((PATCH + 1))
+
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+
+          echo "New version: $NEW_VERSION"
+
+          git config user.name "release-bot"
+          git config user.email "release-bot@gandalf.ch"
+
+          git add src/
+          git commit -m "chore: update data source → ${NEW_VERSION}"
+
+          git tag "$NEW_VERSION"
+
+          git push origin main
+          git push origin "$NEW_VERSION"
