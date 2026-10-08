@@ -3,11 +3,10 @@
   "description": "DeltaT lookup, sourced from https://maia.usno.navy.mil or fallback",
   "type": "library",
   "license": "MIT",
-  "version": "2.0.11",
   "authors": [
     {
       "name": "Patrick Fischer",
-      "email": "mail@patrickfischer.ch"
+      "email": "zero0cool@proton.me"
     }
   ],
   "require": {
