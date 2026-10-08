@@ -6,7 +6,7 @@ class DeltaTUSNO
 {
     /**
      * Lookup delta T by Modified Julian Date
-     * Generated: 2026-10-08T06:07:53+00:00
+     * Generated: 2026-10-08T06:12:47+00:00
      * File hashes:
      * https://maia.usno.navy.mil/ser7/deltat.data: a5ade99a34db9ca5efa45f0e2e5ce89ef07fb8f8
      * https://maia.usno.navy.mil/ser7/deltat.preds: 2302f5e197c0b1f91d08ef8b40ee6076ca7c2695
