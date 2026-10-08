@@ -6,9 +6,9 @@ class DeltaTUSNO
 {
     /**
      * Lookup delta T by Modified Julian Date
-     * Generated: 2026-10-01T12:32:52+00:00
+     * Generated: 2026-10-08T06:07:53+00:00
      * File hashes:
-     * https://maia.usno.navy.mil/ser7/deltat.data: 153045e5b19d371aaa8ef7cdad097eb769a8a24c
+     * https://maia.usno.navy.mil/ser7/deltat.data: a5ade99a34db9ca5efa45f0e2e5ce89ef07fb8f8
      * https://maia.usno.navy.mil/ser7/deltat.preds: 2302f5e197c0b1f91d08ef8b40ee6076ca7c2695
      * https://maia.usno.navy.mil/ser7/historic_deltat.data: b14cda66bfa2ebb4da3f732cb98739c7833ee28d
 
@@ -1930,6 +1930,24 @@ class DeltaTUSNO
         }
         else if ($mjd >= 61100 && $mjd < 61131) { // measured:  2026  3  1  69.1168 -  2026  4  1  69.1330
           return 69.1168;
+        }
+        else if ($mjd >= 61131 && $mjd < 61161) { // measured:  2026  4  1  69.1330 -  2026  5  1  69.1511
+          return 69.1330;
+        }
+        else if ($mjd >= 61161 && $mjd < 61192) { // measured:  2026  5  1  69.1511 -  2026  6  1  69.1662
+          return 69.1511;
+        }
+        else if ($mjd >= 61192 && $mjd < 61222) { // measured:  2026  6  1  69.1662 -  2026  7  1  69.1695
+          return 69.1662;
+        }
+        else if ($mjd >= 61222 && $mjd < 61253) { // measured:  2026  7  1  69.1695 -  2026  8  1  69.1713
+          return 69.1695;
+        }
+        else if ($mjd >= 61253 && $mjd < 61284) { // measured:  2026  8  1  69.1713 -  2026  9  1  69.1816
+          return 69.1713;
+        }
+        else if ($mjd >= 61284 && $mjd < 61314) { // measured:  2026  9  1  69.1816 -  2026 10  1  69.2065
+          return 69.1816;
         }
         else if ($mjd >= 59762 && $mjd < 59853) { // predicted: 59762.000	2022.50	69.29	-0.104	0.031 - 59853.000	2022.75	69.21	-0.025	0.021
           return 69.29;
