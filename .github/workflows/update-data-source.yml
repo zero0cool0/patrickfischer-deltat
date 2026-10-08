@@ -9,18 +9,10 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
-    container:
-      image: php:8.4-cli
-
     permissions:
       contents: write
 
     steps:
-      - name: Install dependencies
-        run: |
-          apt-get update -qq
-          apt-get install -y nodejs git unzip jq
-
       - name: Checkout latest HEAD
         uses: actions/checkout@v4
         with:
@@ -28,10 +20,12 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Composer
-        run: |
-          curl -sS https://getcomposer.org/installer \
-            | php -- --install-dir=/usr/local/bin --filename=composer
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer
 
       - name: Install composer dependencies
         run: composer install --no-dev
